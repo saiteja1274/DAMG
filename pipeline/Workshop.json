@@ -54,14 +54,27 @@
 				"outputs": [
 					{
 						"referenceName": "Parquet2",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Myfile": {
+								"value": "@pipeline().parameters.Filename",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
 			{
 				"name": "Parquet_2_snowflake",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "TSV_2_PARQUET",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.00:30:00",
 					"retry": 1,
@@ -75,23 +88,53 @@
 						"type": "ParquetSource",
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
+							"recursive": false,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "ParquetReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "SnowflakeV2Sink",
+						"importSettings": {
+							"type": "SnowflakeImportCopyCommand"
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage1",
+							"type": "LinkedServiceReference"
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "Parquet3",
+						"referenceName": "Parquet2",
+						"type": "DatasetReference",
+						"parameters": {
+							"Myfile": {
+								"value": "@pipeline().parameters.Filename",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SnowflakeTable1",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
+		"parameters": {
+			"Filename": {
+				"type": "string",
+				"defaultValue": "PET_LICENSE"
+			}
+		},
 		"annotations": []
 	}
 }

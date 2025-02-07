@@ -5,11 +5,20 @@
 			"referenceName": "AzureDataLakeStorage_ls",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"Myfile": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Myfile",
+					"type": "Expression"
+				},
 				"fileSystem": "silver"
 			},
 			"compressionCodec": "snappy"
