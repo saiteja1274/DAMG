@@ -1,0 +1,254 @@
+{
+	"name": "Project",
+	"properties": {
+		"activities": [
+			{
+				"name": "Parquet_2__Snowflake",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:30:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "ParquetReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SnowflakeV2Sink",
+						"importSettings": {
+							"type": "SnowflakeImportCopyCommand"
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage1",
+							"type": "LinkedServiceReference"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ARREST_KEY",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "ARREST_KEY",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "ARREST_DATE_FORMATTED",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "ARREST_DATE_FORMATTED",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "PD_CD",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "PD_CD",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "PD_DESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PD_DESC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "KY_CD",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "KY_CD",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "OFNS_DESC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "OFNS_DESC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LAW_CODE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LAW_CODE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LAW_CAT_CD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LAW_CAT_CD",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ARREST_BORO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ARREST_BORO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ARREST_PRECINCT",
+									"type": "Int16"
+								},
+								"sink": {
+									"name": "ARREST_PRECINCT",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "JURISDICTION_CODE",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "JURISDICTION_CODE",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "AGE_GROUP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "AGE_GROUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PERP_SEX",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PERP_SEX",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PERP_RACE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PERP_RACE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "X_COORD_CD",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "X_COORD_CD",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Y_COORD_CD",
+									"type": "Double"
+								},
+								"sink": {
+									"name": "Y_COORD_CD",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Latitude",
+									"type": "Single"
+								},
+								"sink": {
+									"name": "LATITUDE",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "Longitude",
+									"type": "Single"
+								},
+								"sink": {
+									"name": "LONGITUDE",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"name": "New Georeferenced Column",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NEW_GEOREFERENCED_COLUMN",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ProjectParquet",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Project",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

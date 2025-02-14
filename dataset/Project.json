@@ -1,0 +1,16 @@
+{
+	"name": "Project",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflakeworkshop",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [],
+		"typeProperties": {
+			"schema": "TEMP_SCHEMA",
+			"table": "ARREST_FCT"
+		}
+	}
+}
