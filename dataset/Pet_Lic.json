@@ -1,0 +1,47 @@
+{
+	"name": "Pet_Lic",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflakeworkshop",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "PET_LIC_SK",
+				"type": "NUMBER",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "DATE_SK",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "LOCATION_SK",
+				"type": "NUMBER",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "BREED_SK",
+				"type": "NUMBER",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "DI_JOB_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "DI_LOAD_DT",
+				"type": "DATE"
+			}
+		],
+		"typeProperties": {
+			"schema": "TEMP_SCHEMA",
+			"table": "PET_LIC_FCT"
+		}
+	}
+}
